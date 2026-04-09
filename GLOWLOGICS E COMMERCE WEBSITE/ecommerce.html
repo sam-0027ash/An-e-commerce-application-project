@@ -1,0 +1,1459 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Commerce</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      body {
+        background: rgb(106, 22, 5);
+        background: -webkit-radial-gradient(center, rgb(238, 194, 37), #de190f);
+        min-height: 100vh;
+        color: #030031;
+      }
+      .navbar {
+        background-color: black;
+      }
+      .navbar a {
+        color: antiquewhite !important;
+      }
+      .dropdown-menu {
+        background-color: #111;
+        border: none;
+      }
+      .dropdown-item {
+        color: white;
+      }
+      .dropdown-item:hover {
+        background-color: #222;
+        color: #fff;
+      }
+      .nav-icon {
+        font-size: 1.1rem;
+        margin-left: 15px;
+        position: relative;
+      }
+      .search-box {
+        width: 250px;
+      }
+      .cart-count {
+        position: absolute;
+        top: -7px;
+        right: -9px;
+        background: red;
+        color: white;
+        font-size: 10px;
+        padding: 1px 5px;
+        border-radius: 50%;
+      }
+
+      .btn-warning {
+        transition: 0.3s;
+      }
+
+      .btn-warning:hover {
+        background-color: #ff0000;
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+      .card {
+        border: none;
+        transition: 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .card img {
+        height: 200px;
+        object-fit: scale-down;
+      }
+
+      @media (max-width: 576px) {
+        .row {
+          gap: 15px;
+        }
+      }
+      @media (max-width: 768px) {
+        .card img {
+          height: 150px;
+        }
+      }
+      @media (max-width: 576px) {
+        .btn {
+          font-size: 14px;
+          padding: 6px;
+        }
+      }
+      @media (max-width: 768px) {
+        .search-box {
+          width: 100%;
+          margin-top: 10px;
+        }
+      }
+      @media (max-width: 576px) {
+        .nav-icon {
+          margin-left: 10px;
+        }
+      }
+      .card {
+        border-radius: 12px;
+      }
+
+      @media (max-width: 576px) {
+        .card {
+          padding: 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-lg"
+    >
+      <div class="container-fluid">
+        <a href="./index.html" class="navbar-brand fw-bold">Hearth & Hue</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="./index.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./ecommerce.html">Shop</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                >Categories</a
+              >
+              <ul class="dropdown-menu">
+                <li>
+                  <a
+                    href="ecommerce.html?category=Electronics"
+                    class="dropdown-item"
+                    onclick="filterProducts('Electronics')"
+                    >Electronics</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="ecommerce.html?category=Clothing"
+                    class="dropdown-item"
+                    onclick="filterProducts('Clothing')"
+                    >Clothing</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="ecommerce.html?category=Accessories"
+                    class="dropdown-item"
+                    onclick="filterProducts('Accessories')"
+                    >Accessories</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="ecommerce.html?category=Home"
+                    class="dropdown-item"
+                    onclick="filterProducts('Home')"
+                    >Home & Living</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-warning fw-bold"
+                href="ecommerce.html?filter=deals"
+                onclick="filterDeals()"
+                >Deals</a
+              >
+            </li>
+          </ul>
+          <form class="d-flex me-3">
+            <input
+              class="form-control search-box"
+              type="search"
+              placeholder="Search products..."
+              onkeyup="searchProducts(this.value)"
+            />
+          </form>
+          <div class="d-flex align-items-center">
+            <a href="./wishlist.html" class="nav-icon">
+              <i class="fa-regular fa-heart"></i
+            ></a>
+
+            <a href="./cart.html" class="nav-icon">
+              <i class="fa-solid fa-cart-arrow-down"></i>
+              <span class="cart-count">0</span>
+            </a>
+
+            <a href="#" class="nav-icon">
+              <i class="fa-regular fa-circle-user"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <hr class="horizontal-line mb-0" />
+
+    <div class="container-fluid">
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-2 col-md-3 col-6 mb-3">
+          <button
+            class="btn btn-warning w-75 py-3"
+            onclick="filterProducts('all')"
+          >
+            <i class="fa-solid fa-border-all"></i><br />
+            Show All
+          </button>
+        </div>
+
+        <div class="col-lg-2 col-md-3 col-6 mb-3">
+          <button
+            class="btn btn-warning w-75 py-3"
+            onclick="filterProducts('Electronics')"
+          >
+            <i class="fa-solid fa-display"></i><br />
+            Electronics
+          </button>
+        </div>
+
+        <div class="col-lg-2 col-md-3 col-6 mb-3">
+          <button
+            class="btn btn-warning w-75 py-3"
+            onclick="filterProducts('Clothing')"
+          >
+            <i class="fa-solid fa-shirt"></i><br />
+            Clothing
+          </button>
+        </div>
+
+        <div class="col-lg-2 col-md-3 col-6 mb-3">
+          <button
+            class="btn btn-warning w-75 py-3"
+            onclick="filterProducts('Accessories')"
+          >
+            <i class="fa-regular fa-gem"></i><br />
+            Accessories
+          </button>
+        </div>
+
+        <div class="col-lg-2 col-md-3 col-6 mb-3">
+          <button
+            class="btn btn-warning w-76 py-3"
+            onclick="filterProducts('Home')"
+          >
+            <i class="fa-solid fa-couch"></i><br />
+            Home & Living
+          </button>
+        </div>
+      </div>
+    </div>
+    <hr class="horizontal-line mt-0" />
+
+    <div class="container mt-4">
+      <div class="row g-4">
+        <!-- Product 1 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Electronics"
+          data-deal="true"
+          data-id="p1"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS-31iNGUrzICZfHOpCaoQwm47QzV1mIaEyBh0N-D7rpZcyhyTxASOY3CdpvARfRkEXpgbrQod2GQef3hG_y3bdkNgGA7nK"
+              class="card-img-top"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title">
+                boAt Rockerz 425 Wireless Bluetooth Headphone
+              </h6>
+              <p class="text-muted">₹1,399</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span>
+              <p class="mb-1" style="font-size: small">4.0 ⭐⭐⭐⭐☆ (90+)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Accessories"
+          data-deal="false"
+          data-id="p2"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcR7glgXXmNymwogmZfutjwsJOaEywBj40RciUzA0q29e4_6huzAl3HbmHbTWc4w4xSmJK4Bv7C4N23VWFkuC-r0GJaeKMfFpxJjKgisep3zw3ihv_yaCP1ciQ"
+              class="card-img-top"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title mb-4">GIVA Women's Studs Earring</h6>
+              <p class="text-muted">₹3,169</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <!-- <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span> -->
+              <p class="mb-1" style="font-size: small">4.9 ⭐⭐⭐⭐⭐ (200+)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Accessories"
+          data-deal="true"
+          data-id="p3"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSPEoHdhgeLrGpYa8VMcIIal0qukZhxuM1NJ1TbAZBMXm8m7FZzOVWJZDhK8fMaFlwmRRe8zv6EBt3v_70uuRlEfCNPQu25xds1T_4rseFbGZYdSi65G_Hee-Q"
+              class="card-img-top"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title">
+                GIVA Jewellery Gold Radiant Blossom Diamond Earrings
+              </h6>
+              <p class="text-muted">₹71,760</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -15%
+              </span>
+              <p class="mb-1" style="font-size: small">5.0 ⭐⭐⭐⭐⭐ (90+)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Electronics"
+          data-deal="false"
+          data-id="p4"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSRf4GPi04elft70lX9F6h9_VTF9ziS6e1zIRNm4aOoE1-AgC39MPot7IAqbG8M-pZA9wKqQ3kQn4QAxe-OH8-KmNiCtuzIMtFf9PtXrsH9fB5paRPh1wIVsQ"
+              class="card-img-top"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title">
+                boAt Party Pal 195 50W Portable Bluetooth Speaker
+              </h6>
+              <p class="text-muted">₹6,499</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <!-- <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span> -->
+              <p class="mb-1" style="font-size: small">4.8 ⭐⭐⭐⭐⭐ (8)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Clothing"
+          data-deal="true"
+          data-id="p5"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcS9DwW57EJaLjSG9GFqq7e_H8aFZ0o1_yXxYe8gPVKS_oT5pyxj8fsXMgpv_Z2u1CE5hKM_nJiQHt9-ajiXj7ZoKicsrWpQL7PFedbijIF8-kudfU99kimN"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title mb-4">Allen Solly Men's Slim Fit Shirt</h6>
+              <p class="text-muted">₹2,328</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span>
+              <p class="mb-1" style="font-size: small">4.7 ⭐⭐⭐⭐⭐ (90+)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Clothing"
+          data-deal="false"
+          data-id="p6"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTUwPfEFfG6Cg05pkCv21-7oj44xi1ZmS6Vu1GC6NiFpThvziKnGE2x-iFxQnZox-QmjO_rC8ik-_UMO6PIxzqjKmGxAaZdHrZyFl56iRJUZ1bdzPxkyAuZ"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title">H&M Men's Slim Fit Suit Trousers</h6>
+              <p class="text-muted">₹2,799</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <!-- <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span> -->
+              <p class="mb-1" style="font-size: small">4.1 ⭐⭐⭐⭐☆ (48)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 7 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Electronics"
+          data-deal="true"
+          data-id="p7"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQq5U8_nWNx2c0l_HMBiJjwggiu2mSsH-1PNhKqqcXSFM0qtPB6EzSPkoi1AVc_GnmtI05BKUfRiRU8LlP6odOjJUmJehLCMElWN5zBo4nrI-Le5G1M8NcBUw"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title mb-4">Samsung Galaxy S24 Ultra 5g</h6>
+              <p class="text-muted">₹1,19,999</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -40%
+              </span>
+              <p class="mb-1" style="font-size: small">
+                4.7 ⭐⭐⭐⭐⭐ (150k+)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 8 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Electronics"
+          data-deal="true"
+          data-id="p8"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTGinVcLu977oTP9SRCGsSljQxCfxrad3yF4B4lAxMOT_9BmNv2iw4o3_bFxxpiaopJxoZJs77Df8TTkHbqi4xGNAPbaiAn"
+              class="card-img-top mt-1"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title">Samsung Galaxy Watch8 Classic</h6>
+              <p class="text-muted">₹46,999</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span>
+              <p class="mb-1" style="font-size: small">4.0 ⭐⭐⭐⭐☆ (87)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 9 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Accessories"
+          data-deal="true"
+          data-id="p9"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcReeCg0HeAtXLOI7qEiC1viyTbOAqStezEo1RlIo3HCMBCAmjrXyE5utZxUxN44qHE-_72SYlbV8WPB2qtHS3mJ0kGTWINc"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title mb-4">Orbit Bloom Gold Necklace</h6>
+              <p class="text-muted">₹1,08,233</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -15%
+              </span>
+              <p class="mb-1" style="font-size: small">4.8 ⭐⭐⭐⭐⭐ (30)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 10 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Clothing"
+          data-deal="true"
+          data-id="p10"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTTwc3hMByy8W3lMo6E5TLjAoSyz1hgv5fYvr1MVnGBWxBE8MPVsRGD2LXx0Z4YGKVxgSG5DabckDA_LYewwQMfpUWBe7aVLeuiG6DCgPpz"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title">
+                QUIERO Women's Floral Printed V-Neck Empire Top
+              </h6>
+              <p class="text-muted">₹616</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span>
+              <p class="mb-1" style="font-size: small">4.7 ⭐⭐⭐⭐⭐ (200+)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 11 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Clothing"
+          data-deal="false"
+          data-id="p11"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRWjx6hFcYQU2YehmWOQ51SAR8t21-hmPAQzZwiJmtXDY3jwcJR6wEKwa9d_0HInO25mU59_0yzO5QXBXUDvj2nfrHHKxzBINZhsgdbXOTj"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title">
+                Anouk Floral Print Puff Sleeve A-Line Maxi Dress
+              </h6>
+              <p class="text-muted">₹999</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <!-- <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span> -->
+              <p class="mb-1" style="font-size: small">
+                4.9 ⭐⭐⭐⭐⭐ (100k+)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 12 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Accessories"
+          data-deal="true"
+          data-id="p12"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcT7hHdSZXnxOo-YfknMdm41C2hRpVNxfr9kQz08U4Yf2LxJIs30TWp2Ti-SbkTusZDHmdyH_qAKb6yztJWveKEK9pMHs_0XfxiKyDOwyIlY"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title">Titan Women's Raga Analog Watch</h6>
+              <p class="text-muted">₹6,595</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span>
+              <p class="mb-1" style="font-size: small">4.7 ⭐⭐⭐⭐⭐ (200+)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 13 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Electronics"
+          data-deal="false"
+          data-id="p13"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQu_eHEYxyv6dG6sh71mXwa85Ck_0lp8o0L30e1Xt3WUB9KgQEK3ksxxjTfirx4tPMweRoxT062hF67RXvmmPHsDqjrXoUP0Ips5QgkpanAQ5fAEN6WNzxderNr"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title mb-4">Apple MacBook M5 Pro</h6>
+              <p class="text-muted">₹1,89,900</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <!-- <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span> -->
+              <p class="mb-1" style="font-size: small">
+                4.8 ⭐⭐⭐⭐⭐ (1.8k+)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 14 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Home"
+          data-deal="false"
+          data-id="p14"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcROZxldpCOH444CEnnZ7eccxrF5HnULuMN5rG1eEFiFrVXflKknEHVXGMKwG7mfrqMNKOiCpFzDDrsLcNSMpGftsuP4DQ5aVLs7NteA2ic"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title">
+                Home Centre Lansbury NXT 3-Seater Sofa with Cushions
+              </h6>
+              <p class="text-muted">₹39,999</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <!-- <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span> -->
+              <p class="mb-1" style="font-size: small">3.9 ⭐⭐⭐⭐☆ (45)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 15 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Home"
+          data-deal="true"
+          data-id="p15"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS0tkF7HU9pxxhXZdXITyvZgBH5kLe89ecpyd5tioh5RRqIjhoseFY5qVRIU7TtydAAJ0kCKrXFYRVkSJQqRnk8ONyiOwGlqi0-JpIUGEHXcJyDlPbcqXCCow"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title">IKEA HÄGERNÄS table and 4 chairs</h6>
+              <p class="text-muted">₹24,990</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span>
+              <p class="mb-1" style="font-size: small">4.7 ⭐⭐⭐⭐⭐ (90+)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 16 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Accessories"
+          data-deal="true"
+          data-id="p16"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcT1HKc6pd8Mubb-xbtl4oSj5-SibXCa7Lq9NB7DZm5nj5txBr-pXw5Vr4FnjpZihNgqMOyL_PaLDfEwt6UG0RHuqs0T1OTOfA"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title mb-4">Silver Temple Necklace</h6>
+              <p class="text-muted">₹54,882</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span>
+              <p class="mb-1" style="font-size: small">4.1 ⭐⭐⭐⭐☆ (46)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 17 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Home"
+          data-deal="true"
+          data-id="p17"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQlSWugCGNROGNr5EYYG96f4wnEDQF6K29pmxLfA3Ic0T_CWq2iVflTYo7AK2ZtSo0YqvXzJJhxSJBq3ykjvpPZ9SDvObFDy3nl7FQuzffZ"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title mb-4">
+                Kraft Bazaar Ranthambore Sideboard Cabinet
+              </h6>
+              <p class="text-muted">₹21,999</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span>
+              <p class="mb-1" style="font-size: small">4.0 ⭐⭐⭐⭐☆ (90+)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 18 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Home"
+          data-deal="false"
+          data-id="p18"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSh_3vWHOJVgE2sM4oY0hRSNkIopQKbsvfwQdhyqR3exlWkddyqsuCMl3MGTHmfvVHRCO_FxafPS9kdon-6MwkJDG6MQYzh8A"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title">
+                Belita Fabric Contemporary LHS Sectional Sofas - In Greige
+                Colour
+              </h6>
+              <p class="text-muted">₹88,249</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <!-- <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span> -->
+              <p class="mb-1" style="font-size: small">3.9 ⭐⭐⭐⭐☆ (67)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 19 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Clothing"
+          data-deal="true"
+          data-id="p19"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTUakFfa4FUMVFQZWOKn4dKf8m1M3SjRKqcrVtz3VunX4n1uEKVn04TPPgRYVU5zq0-N94z3iJPDBnmUUGMsk6C2xVfOqz_I_s-lfi5gicEi88MZaCHS2J92A"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title mb-4">
+                Soch Women's Embroidered Lehenga & Choli & Dupatta
+              </h6>
+              <p class="text-muted">₹16,998</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span>
+              <p class="mb-1" style="font-size: small">4.8 ⭐⭐⭐⭐⭐ (200+)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 20 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Home"
+          data-deal="true"
+          data-id="p20"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRlHu6s3pVmydK3vyQv-WJkQAxNIguATG_NXeBoUCClS2VFD1F2UPKv4_h2wVtOZ9_fFJwoaUbuAW2KjyTBKRgd5Dw5u6zwZtkPllZnxXr1"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title mb-3">Furniselan Boston Dining Table</h6>
+              <br />
+              <p class="text-muted">₹16,599</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span>
+              <p class="mb-1" style="font-size: small">4.9 ⭐⭐⭐⭐⭐ (37)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 21 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Electronics"
+          data-deal="true"
+          data-id="p21"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQCqKuKoLLpDoGAhe6avxBOeoUCvZqoGODTCddyhhaD1HCSaQN_PGQfYc2CXAwzTKn0bELflZ1DLuKt9IIYj2v7ZYCUrOE14A"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title mb-4">Samsung Galaxy Tab S11 Ultra</h6>
+              <p class="text-muted">₹1,51,999</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span>
+              <p class="mb-1" style="font-size: small">
+                4.8 ⭐⭐⭐⭐⭐ (150k+)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 22 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Accessories"
+          data-deal="false"
+          data-id="p22"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT3PvmQ6gL0jCDiNekvdZIVT9WAA4LNy0FHAZ5r1j2yleNapoQVlP0837fHLGgC8dKKysJafwXKjqiHaADm50l5D-FFdVhBvT45hg6D8dfgrxAIfH55VVc_EQ"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title">
+                GIVA Women's Sparkling Loop Classic Ring
+              </h6>
+              <p class="text-muted">₹2,719</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <!-- <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span> -->
+              <p class="mb-1" style="font-size: small">4.7 ⭐⭐⭐⭐⭐ (94)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 23 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Accessories"
+          data-deal="true"
+          data-id="p23"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://cdn.orra.co.in/media/catalog/product/cache/10238651d5f95594b9023f998383bb67/o/b/obf13051_1_ppdypwgjh4qk3k6b.jpg"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title">
+                Gleaming Diamond and Rose Gold Bracelet
+              </h6>
+              <p class="text-muted">₹2,81,217</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span>
+              <p class="mb-1" style="font-size: small">4.9 ⭐⭐⭐⭐⭐ (66)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 24 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Clothing"
+          data-deal="false"
+          data-id="p24"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTy1jrII8-kgInFD3gCRqLRgstCVcClEZyfqPkdMdyNDZvC6Aeqis3zoQwfy6Q6NdKrGr5A6ozuYEbuoFicM9GldABW01nU_w"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title">
+                Louis Philippe Men's Solid Casual Two Piece Suit
+              </h6>
+              <p class="text-muted">₹7,963</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <!-- <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span> -->
+              <p class="mb-1" style="font-size: small">5.0 ⭐⭐⭐⭐⭐ (2)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 25 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Home"
+          data-deal="true"
+          data-id="p25"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTaGcr2k0mfjCXq6hDo46O4_Ja6bljLHWWzhS-jjuWnXsw9ahb8IedNP0q5LaPN7nSEwgTGuW60oaQBdEBUy_LrRW4oQVcPUSDPQaM0Ugc"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title">
+                Snazzy Wood Plant Stand Indoor/Outdoor 14-Tier Tall Plant Shelf
+                for Plants
+              </h6>
+              <p class="text-muted">₹3,495</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span>
+              <p class="mb-1" style="font-size: small">4.0 ⭐⭐⭐⭐☆ (22)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 26 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Clothing"
+          data-deal="false"
+          data-id="p26"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQdlE-XHoO0HEjsJBFK47LxgEw0b7yhnr9m26pZBy4xs7Tcjeq4tCAOcrRpi754QFpcf-ST6GJw1RynK5WQWZdV-GZTSNFTDtRbFRmCtVx-UZu-HNIGj7rm2A"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title mb-3">Gold Kanjivaram Silk Saree</h6>
+              <br />
+              <p class="text-muted mb-4">₹28,495</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <!-- <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span> -->
+              <p class="mb-1" style="font-size: small">4.7 ⭐⭐⭐⭐⭐ (90+)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 27 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Electronics"
+          data-deal="false"
+          data-id="p27"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRsTU5tEX8P3BZ9a1P8S1uupqAHcZXPHFU2_pEQg0xjn8FbVxO0S5Qtw9ECxs9Q1WTjAxqxTIZLgAGIycQazO-Wu9kewhwlbv47yz7lk4-7In48bmLLSkqH2g"
+              class="card-img-top mt-1"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title mb-2">
+                TP Link Archer AX10 AX1500 Wi-Fi 6 Router
+              </h6>
+              <br />
+              <p class="text-muted">₹3,750</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <!-- <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span> -->
+              <p class="mb-1" style="font-size: small">
+                4.7 ⭐⭐⭐⭐⭐ (2.5k+)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 28 -->
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-12 product"
+          data-category="Home"
+          data-deal="true"
+          data-id="p28"
+        >
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTQQrVgQmv8FKelExhsABE2sazFSwuaqhYuMbIeyCihffA2ufrP-T5KleNDnNcuOOvplL01kJ-HtmxiZRsI6yqwXTUorACb5E495GNePa4"
+              class="card-img-top mt-2"
+              alt="product"
+            />
+
+            <div class="card-body text-center">
+              <h6 class="card-title">
+                Wakefit Engineered Wood Bed Queen Columbian Walnut Side Storage
+              </h6>
+              <p class="text-muted">₹19,000</p>
+              <button class="btn btn-warning w-100" onclick="addToCart(this)">
+                Add to Cart
+              </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <i
+                  class="fa-regular fa-heart"
+                  onclick="toggleWishList(this)"
+                ></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">
+                -20%
+              </span>
+              <p class="mb-1" style="font-size: small">4.9 ⭐⭐⭐⭐⭐ (90+)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function filterProducts(category) {
+        let products = document.querySelectorAll(".product");
+        products.forEach((product) => {
+          if (product.dataset.category === category) {
+            product.style.display = "block";
+          } else {
+            product.style.display = "none";
+          }
+        });
+      }
+
+      function filterProducts(category) {
+        let products = document.querySelectorAll(".product");
+
+        products.forEach((product) => {
+          if (category === "all" || product.dataset.category === category) {
+            product.style.display = "block";
+          } else {
+            product.style.display = "none";
+          }
+        });
+      }
+
+      function filterDeals() {
+        let products = document.querySelectorAll(".product");
+
+        products.forEach((product) => {
+          if (product.dataset.deal === "true") {
+            product.style.display = "block";
+          } else {
+            product.style.display = "none";
+          }
+        });
+      }
+
+      function getCategoryFromURL() {
+        let params = new URLSearchParams(window.location.search);
+        return params.get("category");
+      }
+
+      function filterFromURL() {
+        let category = getCategoryFromURL();
+
+        if (!category) return;
+
+        document.querySelectorAll(".product").forEach((product) => {
+          if (product.dataset.category === category) {
+            product.style.display = "block";
+          } else {
+            product.style.display = "none";
+          }
+        });
+      }
+
+      function applyFiltersFromURL() {
+        let params = new URLSearchParams(window.location.search);
+        let filter = params.get("filter");
+
+        if (filter === "deals") {
+          filterDeals(); 
+        }
+      }
+
+      function searchProducts(query) {
+        let products = document.querySelectorAll(".product");
+        query = query.toLowerCase();
+        products.forEach((product) => {
+          let titleElement = product.querySelector(".card-title");
+          if (!titleElement || !titleElement.innerText) return;
+
+          let title = titleElement.innerText.toLowerCase();
+
+          if (title.includes(query)) {
+            product.style.display = "block";
+          } else {
+            product.style.display = "none";
+          }
+        });
+      }
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+      function addToCart(btn) {
+        let product = btn.closest(".product");
+        let id = product.dataset.id;
+        let name = product.querySelector(".card-title").innerText;
+        let price = product.querySelector(".text-muted").innerText;
+
+        let existing = cart.find((item) => item.id === id);
+
+        if (existing) {
+          existing.quantity += 1;
+        } else {
+          cart.push({ id, name, price, quantity: 1 });
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+      }
+
+      function toggleWishList(icon) {
+        let product = icon.closest(".product");
+        if (!product) return;
+
+        let id = product.dataset.id;
+        let name = product.querySelector(".card-title")?.innerText;
+        let price = product.querySelector(".text-muted")?.innerText;
+        let img = product.querySelector("img")?.src;
+
+        let existing = wishlist.find((item) => item.id === id);
+
+        if (existing) {
+          wishlist = wishlist.filter((item) => item.id !== id);
+
+          icon.classList.remove("fa-solid", "text-danger");
+          icon.classList.add("fa-regular");
+        } else {
+          wishlist.push({ id, name, price, img });
+
+          icon.classList.remove("fa-regular");
+          icon.classList.add("fa-solid", "text-danger");
+        }
+
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+      }
+
+      function updateCartCount() {
+        let total = cart.reduce((sum, item) => sum + item.quantity, 0);
+        document.querySelector(".cart-count").innerText = total;
+      }
+
+      function loadData() {
+        updateCartCount();
+      }
+
+      function loadWishlistState() {
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+        document.querySelectorAll(".product").forEach((product) => {
+          let id = product.dataset.id;
+          let icon = product.querySelector(".fa-heart");
+
+          if (!icon) return;
+
+          let exists = wishlist.find((item) => item.id === id);
+
+          if (exists) {
+            icon.classList.remove("fa-regular");
+            icon.classList.add("fa-solid", "text-danger");
+          }
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        loadData();
+        loadWishlistState();
+        filterFromURL();
+        applyFiltersFromURL();
+      });
+    </script>
+  </body>
+</html>
